@@ -298,36 +298,22 @@ function generateRanking(data) {
 }
 	
 function getNationsData(){
-	var url = "https://marsigliadev.github.io/test-page/data/data_nations.json";	
-	loadJSON(url, function(response) {
-		return JSON.parse(response);
-	 });
+	$.getJSON("./data/data_nations.json", function(json) {
+		var data = json; 
+		return data;
+	});
 }
 
 function getRankingsInfo(){
-	var url = "https://marsigliadev.github.io/test-page/data/elo_rankings_info.json";	
-	loadJSON(url, function(response) {
-		return JSON.parse(response);
-	 });
+	$.getJSON("./data/elo_rankings_info.json", function(json) {
+		var data = json; 
+		return data;
+	});
 }
 	
 function getNationsSpecialInfo() {
-	var url = "https://marsigliadev.github.io/test-page/data/nations_special_info.json";	
-	loadJSON(url, function(response) {
-		return JSON.parse(response);
-	 });
+    $.getJSON("./data/data_nations.json", function(json) {
+		var data = json; 
+		return data;
+	});
 }
-
-function loadJSON(path, callback) {   
-
-    var xobj = new XMLHttpRequest();
-        xobj.overrideMimeType("application/json");
-    xobj.open('GET', path, true); // Replace 'my_data' with the path to your file
-    xobj.onreadystatechange = function () {
-          if (xobj.readyState == 4 && xobj.status == "200") {
-            // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
-            callback(xobj.responseText);
-          }
-    };
-    xobj.send(null);  
- }
