@@ -299,23 +299,17 @@ function generateRanking(data) {
 	
 function getNationsData(){
 	var url = "https://marsigliadev.github.io/test-page/data/data_nations.json";	
-	loadJSON(function(response) {
-		return JSON.parse(response);
-	 });
+	return JSON.parse(url);
 }
 
 function getRankingsInfo(){
 	var url = "https://marsigliadev.github.io/test-page/data/elo_rankings_info.json";	
-	loadJSON(function(response) {
-		return JSON.parse(response);
-	 });
+	return JSON.parse(url);
 }
 	
 function getNationsSpecialInfo() {
 	var url = "https://marsigliadev.github.io/test-page/data/nations_special_info.json";	
-	loadJSON(function(response) {
-		return JSON.parse(response);
-	 });
+	return JSON.parse(url);
 }
 
 function loadJSON(callback) {   
