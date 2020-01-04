@@ -299,24 +299,30 @@ function generateRanking(data) {
 	
 function getNationsData(){
 	var url = "https://marsigliadev.github.io/test-page/data/data_nations.json";	
-	return JSON.parse(url);
+	loadJSON(url, function(response) {
+		return JSON.parse(response);
+	 });
 }
 
 function getRankingsInfo(){
 	var url = "https://marsigliadev.github.io/test-page/data/elo_rankings_info.json";	
-	return JSON.parse(url);
+	loadJSON(url, function(response) {
+		return JSON.parse(response);
+	 });
 }
 	
 function getNationsSpecialInfo() {
 	var url = "https://marsigliadev.github.io/test-page/data/nations_special_info.json";	
-	return JSON.parse(url);
+	loadJSON(url, function(response) {
+		return JSON.parse(response);
+	 });
 }
 
-function loadJSON(callback) {   
+function loadJSON(path, callback) {   
 
     var xobj = new XMLHttpRequest();
         xobj.overrideMimeType("application/json");
-    xobj.open('GET', 'my_data.json', true); // Replace 'my_data' with the path to your file
+    xobj.open('GET', path, true); // Replace 'my_data' with the path to your file
     xobj.onreadystatechange = function () {
           if (xobj.readyState == 4 && xobj.status == "200") {
             // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
