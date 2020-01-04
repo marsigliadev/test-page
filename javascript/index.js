@@ -298,22 +298,16 @@ function generateRanking(data) {
 }
 	
 function getNationsData(){
-	$.getJSON("https://marsigliadev.github.io/test-page/data/data_nations.json", function(json) {
-		var data = json; 
-		return data;
-	});
+	var data = require("https://marsigliadev.github.io/test-page/data/data_nations.json");	
+	return data;
 }
 
 function getRankingsInfo(){
-	$.getJSON("https://marsigliadev.github.io/test-page/data/elo_rankings_info.json", function(json) {
-		var data = json; 
-		return data;
-	});
+	var data = require("https://marsigliadev.github.io/test-page/data/elo_rankings_info.json");	
+	return data;
 }
 	
 function getNationsSpecialInfo() {
-    $.getJSON("https://marsigliadev.github.io/test-page/data/nations_special_info.json", function(json) {
-		var data = json; 
-		return data;
-	});
+	var data = require("https://marsigliadev.github.io/test-page/data/nations_special_info.json");	
+	return data;
 }
