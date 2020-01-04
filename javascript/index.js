@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function(){ 
+
 	var isPlayersRanking = false;
 	var isNationsRanking = false;
 	var is1v1Ranking = false;
