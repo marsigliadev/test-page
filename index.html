@@ -9,6 +9,19 @@
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
 	
+	<!-- Important Links -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"> 
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.semanticui.min.css"> 
+	<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.semanticui.min.css"> 
+	<link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/3.3.0/css/fixedColumns.dataTables.min.css"> 
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.js"></script>
+  
+  
     <!-- CSS -->
 	<link rel="stylesheet" href="https://marsigliadev.github.io/test-page/styles/style.css" />
 	
@@ -19,32 +32,110 @@
 </head>
 
 <body>
-	<h1>Hello, World!</h1>
-	<h4 id='date'></h4>
-	
-	<div class="image-section">
-      <div class="section-style">
-        <img src="https://source.unsplash.com/random/400x200" alt="" />
-        <p>A random image courtesy of unsplash.com.</p>
-      </div>
+	<div class="pusher">
+		
+		<!-- Navbar -->
+		<div class="ui inverted vertical footer segment">
+			<div class="ui inverted sticky borderless fluid stackable secondary pointing menu">
+				<a class="brand item header" href="/home/">
+					<img src="https://royaleapi.com/static/img/branding/cr-api-logo.png" style="padding-right: 0.7rem; height:2rem; width: auto;" />
+					<span class="mobile-hide">Royale Ranking</span>
+				</a>
+				<div class="right compact menu">
+					<a class="mobile-hide nav item" href="/1v1/">1v1 Ranking</a>
+					<a class="mobile-hide nav item" href="/2v2/">2v2 Ranking</a>
+					<a class="mobile-hide nav item active" href="/nations/">Countries Ranking</a>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Content page -->
+		<div id="page_content_container" style="width:90%;" class="centered-content">
+			<div id="page_content">
+				
+				<!-- Table title -->
+				<div class="ui hidden divider"></div>
+				<div id="rank-title"></div>
+				
+				<!-- Table -->
+				<div class="ui hidden divider"></div>
+				<div class="table-container" style='width:100%'>
+					<table id="rank-table" class="ui striped unstackable selectable nowrap table" cellspacing="0" style="width:100%; font-size:12px; font-family: Roboto, Helvetica, Arial, Verdana, sans-serif; font-weight: normal;">
+						<thead id="table-header">
+						</thead>
+						<tbody id="table-body"></tbody>
+					</table>
+				</div>
+				
+				<!-- Table info -->
+				<div class="ui divider"></div>
+				<div class="ui six column doubling grid tabinfo"> 
+					<div class="row">
+						<div class="column"><label id="last-update"></label></div>
+						<div class="column"><label id="battle-count"></label></div>
+						<div class="column"><div id="last-battle"></div></div>
+						<div class="column"><div id="first-battle"></div></div>
+						<div class="column"><div id="max-elo"></div></div>
+						<div class="column"><div id="min-elo"></div></div>
+					</div>
+				</div>
+				
+				<!-- Spacial info -->
+				<div class="ui divider"></div>
+				<div class="tabinfo" id="special-info"></div>
+			
+			</div>
+		</div>
+		
+		<!-- Spinner -->
+        <div class="ui hidden divider"></div>
+		<div class="ui center aligned container" id="spinner"></div>
 
-      <div class="section-style">
-        <img src="https://source.unsplash.com/random/400x200" alt="" />
-        <p>A random image courtesy of unsplash.com.</p>
-      </div>
-    </div>
-
-    <div class="image-section">
-      <div class="section-style">
-        <img src="https://source.unsplash.com/random/400x200" alt="" />
-        <p>A random image courtesy of unsplash.com.</p>
-      </div>
-
-      <div class="section-style">
-        <img src="https://source.unsplash.com/random/400x200" alt="" />
-        <p>A random image courtesy of unsplash.com.</p>
-      </div>
-    </div>
+        <!-- Footer -->
+        <div class="ui inverted footer vertical segment">
+            <div class="ui container">
+                <div class="ui stackable"> 
+                    <div class="ui stackable inverted grid">
+                        <div class="row">
+							<div id="social_column" class="eight wide column">
+								<h5 class="ui inverted tiny header">Developed by Luis Marsiglia</h5>
+								
+								<a class="social_icon_link" target="_blank" href="https://twitter.com/marsigliaCR">
+									<img target="_blank" class="ui centered middle aligned image" src="https://res.cloudinary.com/marsiglia/brands/twitter.svg" style="height:2rem; width: auto;"/>
+								</a>
+								<a class="social_icon_link" target="_blank" href="https://liquipedia.net/clashroyale/MARSIGLIA">
+									<img target="_blank" class="ui centered middle aligned image" src="https://res.cloudinary.com/marsiglia/brands/liquipedia.svg" style="height:2rem; width: auto;"/>
+								</a>
+								<a class="social_icon_link" target="_blank" href="https://royaleapi.com/player/L200RVLJ">
+									<img target="_blank" class="ui centered middle aligned image" src="https://res.cloudinary.com/marsiglia/brands/royale-api.png" style="height:2rem; width: auto;"/>
+								</a>
+								<a class="social_icon_link" target="_blank" href="https://paypal.me/marsigliah">
+									<img target="_blank" class="ui centered middle aligned image" src="https://res.cloudinary.com/marsiglia/brands/paypal2.png" style="height:2rem; width: auto;"/>
+								</a>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="ui divider"></div>
+				<div class="ui mini bottom inverted sticky borderless fluid stackable secondary compact menu" style="font-size:12px; color:grey; display: inline-flex; justify-content: center;">
+					<p>This content is not affiliated with, endorsed, sponsored, or specifically approved by Supercell and Supercell is not responsible for it. 
+					For more information see Supercell's <a href='http://supercell.com/fan-content-policy/' rel=noopener target="blank">Fan Content Policy</a>.
+					</p>
+				</div>
+			</div>	
+		</div>
+		
+		<!-- Secondary Links -->
+	   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	   <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+	   <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" defer ></script>
+	   <script src="https://cdn.datatables.net/1.10.20/js/dataTables.semanticui.min.js" defer ></script>
+	   <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js" defer ></script>
+	   <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.semanticui.min.js" defer ></script>
+			
+		
+     </div>
 </body>
 
 </html>

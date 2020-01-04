@@ -1,19 +1,285 @@
-body {
-  text-align: center;
-  background-color: #f0e8c5;
-}
+<style>
+    <!-- General -->
+    body {
+         height:100%;
+         color: #000000;
+         font-family: Roboto, Helvetica, Arial, Verdana, sans-serif;
+         font-size: 10pt;
+     }
+     
+    .centered-content {
+       margin-left: auto;
+       margin-right: auto;
+       max-width: 1280px;
+       float: none;
+       display: block;
+    }
+    
+    .legend {
+        font-size: 13px;
+        font-style: italic;
+        color: grey;        
+    }
+    
+    .tabinfo {
+        font-size: 11px;
+        color: grey;        
+    }
+    
+    #table-container table {
+      border-spacing: 0;
+      border-top: none;
+        border-bottom: none;
+    }
+    
+    <!-- Details control - DataTables -->
+    td.details-control {
+      background: url('https://www.datatables.net/examples/resources/details_open.png') no-repeat center center;
+      cursor: pointer;
+    }
+     tr.shown td.details-control {
+      background: url('https://www.datatables.net/examples/resources/details_close.png') no-repeat center center;
+    }
+    
+    <!-- Footer fotmat -->
+    footer {
+        text-align: center;
+    }
+    
+    /* Spinner */
+    .refreshing-loader:not(:required):after {
+      display: block;
+      border: 0.5em solid transparent;
+      border-top-color: #9ac;
+      border-left-color: #9ac;
+      content: '';
+      width: 0;
+      height: 0;
+      overflow: hidden;
+      margin-left: -0.2em;
+      margin-top: 1em;
+    }
+    
+    @-moz-keyframes throbber-loader {
+      0% {
+        background: #dde2e7;
+      }
+      10% {
+        background: #6b9dc8;
+      }
+      40% {
+        background: #dde2e7;
+      }
+    }
+    @-webkit-keyframes throbber-loader {
+      0% {
+        background: #dde2e7;
+      }
+      10% {
+        background: #6b9dc8;
+      }
+      40% {
+        background: #dde2e7;
+      }
+    }
+    @keyframes throbber-loader {
+      0% {
+        background: #dde2e7;
+      }
+      10% {
+        background: #6b9dc8;
+      }
+      40% {
+        background: #dde2e7;
+      }
+    }
+    /* :not(:required) hides these rules from IE9 and below */
+    .throbber-loader:not(:required) {
+      -moz-animation: throbber-loader 2000ms 300ms infinite ease-out;
+      -webkit-animation: throbber-loader 2000ms 300ms infinite ease-out;
+      animation: throbber-loader 2000ms 300ms infinite ease-out;
+      background: #dde2e7;
+      display: inline-block;
+      position: relative;
+      text-indent: -9999px;
+      width: 0.9em;
+      height: 1.5em;
+      margin: 0 1.6em;
+    }
+    .throbber-loader:not(:required):before, .throbber-loader:not(:required):after {
+      background: #dde2e7;
+      content: '\x200B';
+      display: inline-block;
+      width: 0.9em;
+      height: 1.5em;
+      position: absolute;
+      top: 0;
+    }
+    .throbber-loader:not(:required):before {
+      -moz-animation: throbber-loader 2000ms 150ms infinite ease-out;
+      -webkit-animation: throbber-loader 2000ms 150ms infinite ease-out;
+      animation: throbber-loader 2000ms 150ms infinite ease-out;
+      left: -1.6em;
+    }
+    .throbber-loader:not(:required):after {
+      -moz-animation: throbber-loader 2000ms 450ms infinite ease-out;
+      -webkit-animation: throbber-loader 2000ms 450ms infinite ease-out;
+      animation: throbber-loader 2000ms 450ms infinite ease-out;
+      right: -1.6em;
+    }
+    /* End Spinner */
+    
+    /* Datatable */
+    .ui.table.dataTable thead th {
+      cursor: pointer;
+      white-space: nowrap;
+      border-left: 1px solid rgba(34, 36, 38, 0.15);
+      color: rgba(0, 0, 0, 0.87);
+    }
+    
+    .ui.table.dataTable thead th:first-child {
+      border-left: none;
+    }
+    
+    .ui.table.dataTable thead .sorting,
+    .ui.table.dataTable thead .sorting_asc ,
+    .ui.table.dataTable thead .sorting_desc ,
+    .ui.table.dataTable thead .sorting_asc_disabled ,
+    .ui.table.dataTable thead .sorting_desc_disabled,
+    .ui.table.dataTable thead .sorting:hover,
+    .ui.table.dataTable thead .sorting_asc:hover ,
+    .ui.table.dataTable thead .sorting_desc:hover ,
+    .ui.table.dataTable thead .sorting_asc_disabled:hover ,
+    .ui.table.dataTable thead .sorting_desc_disabled:hover  {
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+    
+    .ui.table.dataTable thead th:after {
+      display: none;
+      font-style: normal;
+      font-weight: normal;
+      text-decoration: inherit;
+      content: '';
+      height: 1em;
+      width: auto;
+      opacity: 0.8;
+      margin: 0em 0em 0em 0.5em;
+      font-family: 'Icons';
+    }
+    
+    .ui.table.dataTable thead th.sorting_asc:after {
+      /*content: '\f0d8';*/
+      content: '\f160';
+    }
+    
+    .ui.table.dataTable thead th.sorting_desc:after {
+      /*content: '\f0d7';*/
+      content: '\f161';
+    }
+    
+    .ui.table.dataTable thead th.sorting:after {
+        content: '\f0dc';
+        opacity: 0.2;
+    }
+    
+    /* Hover */
+    
+    .ui.table.dataTable th.disabled:hover {
+      cursor: auto;
+      color: rgba(40, 40, 40, 0.3);
+    }
+    
+    .ui.table.dataTable thead th:hover {
+      background: rgba(0, 0, 0, 0.05);
+      color: rgba(0, 0, 0, 0.8);
+    }
+    
+    /* Sorted */
+    
+    .ui.table.dataTable thead .sorting_asc ,
+    .ui.table.dataTable thead .sorting_desc ,
+    .ui.table.dataTable thead .sorting_asc_disabled ,
+    .ui.table.dataTable thead .sorting_desc_disabled {
+      background: rgba(0, 0, 0, 0.05);
+      color: rgba(0, 0, 0, 0.95);
+    }
 
-div {
-  margin-top: 15px;
-}
-
-.image-section {
-  display: flex;
-  justify-content: center;
-}
-
-.section-style {
-  margin-right: 25px;
-  margin-left: 25px;
-  background-color: white;
-}
+    /* Sorted Hover */
+    
+    .ui.table.dataTable thead .sorting_asc:hover ,
+    .ui.table.dataTable thead .sorting_desc:hover ,
+    .ui.table.dataTable thead .sorting_asc_disabled:hover ,
+    .ui.table.dataTable thead .sorting_desc_disabled:hover  {
+      background: rgba(0, 0, 0, 0.05);
+      color: rgba(0, 0, 0, 0.95);
+    }
+    
+    
+    .dataTables_length select {
+       background: #fff none repeat scroll 0 0;
+        border: 1px solid rgba(34, 36, 38, 0.15);
+        border-radius: 0.285714rem;
+        box-shadow: none;
+        color: rgba(0, 0, 0, 0.87);
+        cursor: pointer;
+        display: inline-block;
+         line-height: 1.2142em;
+        min-height:   0.714286em;
+      
+        outline: 0 none;
+        padding: 0.3em;
+        transform: rotateZ(0deg);
+        transition: box-shadow 0.1s ease 0s, width 0.1s ease 0s;
+        white-space: normal;
+        word-wrap: break-word; 
+         }
+      
+      .dataTables_wrapper .dataTables_filter {
+        text-align: right; 
+       
+        color: rgba(0, 0, 0, 0.87);
+        display: inline-flex;
+        position: relative;
+       }
+        
+       .dataTables_wrapper .dataTables_filter input {
+          margin-left: 0.5em; 
+       }
+      
+      .dataTables_wrapper .dataTables_info {
+        clear: both;
+        padding-top: 0.755em; 
+       }
+       
+    .dataTables_filter input {
+        background: #fff none repeat scroll 0 0;
+        border: 1px solid rgba(34, 36, 38, 0.15);
+        border-radius: 0.285714rem;
+        box-shadow: none;
+        color: rgba(0, 0, 0, 0.87);
+        flex: 1 0 auto;
+        font-family: "Helvetica Neue",Arial,Helvetica,sans-serif;
+        height:1em;
+        margin: 0;
+        max-width: 100%;
+        outline: 0 none;
+        padding: .4em;
+        text-align: left;
+        transition: background-color 0.1s ease 0s, box-shadow 0.1s ease 0s, border-color 0.1s ease 0s;
+    }
+    
+    /* Fix bug of disabled scroll bar when sorting */
+    .dataTables_scrollHead {
+        overflow: hidden;
+        position: relative;
+        width: 100% !important;
+      }
+      .dataTables_scrollBody {
+        position: relative;
+        overflow: auto;
+        width: 100% !important;
+      }
+</style>
